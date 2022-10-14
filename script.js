@@ -1,50 +1,3 @@
-console.log("test");
-
-// The formula for compound interest, including principal sum, is:
-// A = P(1 + r/n)^nt
-
-//   Where:
-
-// A = the future value of the investment/loan, including interest
-// P = the principal investment amount (the initial deposit or loan amount)
-// r = the annual interest rate (decimal)
-// n = the number of times that interest is compounded per unit t
-// t = the time the money is invested or borrowed for
-
-//   const A = {
-//     P: 5000,
-//     r: 0.05,
-//     n: 12,
-//     t: 10,
-//   };
-
-//   const A = {
-//     P: principleAmount,
-//     r: interestRate / 100,
-//     n: 12,
-//     t: years,
-//     PMT: monthlyContribution,
-//   };
-
-// [ ] 2 Formula for regular contributions
-//  PMT = the monthly payment
-
-// PMT × {[(1 + r/n)(nt) - 1] / (r/n)}
-
-//   return (
-//     <div>
-//       ${" "}
-//       {A.PMT === null
-//         ? (A.P * Math.pow(1 + A.r / A.n, A.n * A.t)).toFixed(2)
-//         : (
-//             A.P * Math.pow(1 + A.r / A.n, A.n * A.t) +
-//             A.PMT * ((Math.pow(1 + A.r / A.n, A.n * A.t) - 1) / (A.r / A.n))
-//           ).toFixed(2)}
-//     </div>
-//   );
-
-// [ ] Get elements by Id from the DOM
-
 const compoundInterestCalculator = document.getElementById(
   "CompoundInterestCalculator"
 );
@@ -67,32 +20,25 @@ compoundInterestCalculator.addEventListener("submit", function (e) {
 });
 
 function calculateCompoundInterest() {
+  result.classList.add("fade");
+  setTimeout(() => {
+    result.classList.remove("fade");
+  }, 1000);
   if (monthlyContribution.value === "") {
-    return (result.innerHTML = compoundInterest(
-      initialBalance.value,
-      interestRate.value,
-      years.value
-    ));
+    return (result.innerHTML =
+      compoundInterest(initialBalance.value, interestRate.value, years.value) +
+      "$");
   } else {
-    return (result.innerHTML = compoundInterestWithContribution(
-      initialBalance.value,
-      interestRate.value,
-      years.value,
-      monthlyContribution.value
-    ));
+    return (result.innerHTML =
+      compoundInterestWithContribution(
+        initialBalance.value,
+        interestRate.value,
+        years.value,
+        monthlyContribution.value
+      ) + "$");
   }
 }
 
-// The formula for compound interest, including principal sum, is:
-// A = P(1 + r/n)^nt
-
-//   Where:
-
-// A = the future value of the investment/loan, including interest
-// P = the principal investment amount (the initial deposit or loan amount)
-// r = the annual interest rate (decimal)
-// n = the number of times that interest is compounded per unit t
-// t = the time the money is invested or borrowed for
 
 function compoundInterest(principleAmount, interestRate, years) {
   console.log("simple compounding");
@@ -102,10 +48,6 @@ function compoundInterest(principleAmount, interestRate, years) {
   ).toFixed(2);
 }
 
-// [ ] 2 Formula for regular contributions
-//  PMT = the monthly contributions
-
-// PMT × {[(1 + r/n)^(nt) - 1] / (r/n)}
 
 function compoundInterestWithContribution(
   principleAmount,
@@ -123,6 +65,4 @@ function compoundInterestWithContribution(
   ).toFixed(2);
 }
 
-function interest() {
-  setTimeout(() => {}, 500);
-}
+
